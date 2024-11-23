@@ -1,0 +1,12 @@
+{
+  "name": "Exotic Dungeon",
+  "version": 1,
+  "description": "A dungeon that becomes much more challenging with exotic enemies. Some enemies have never been discovered by any hero before.",
+  "author": "Dark-Shadow",
+  "license": "GPLv3",
+  "gameplay_mod": true,
+  "min_cpd_version": 10,
+  "languages": [
+    "English"
+  ]
+}
