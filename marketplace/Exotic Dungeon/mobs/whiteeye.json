@@ -34,7 +34,7 @@
   },
   "hp": 120,
   "exp": 13,
-  "max_lvl": 27,
+  "max_lvl": 26,
   "evasion": 30,
   "speed": 1,
   "accuracy": 40,
@@ -45,7 +45,7 @@
   "loot": {
     "type": "bombs.Flashbang"
   },
-  "loot_chance": 0.15,
+  "loot_chance": 0.075,
   "enchantments": [
     {
       "type": "curses.Dazzling",

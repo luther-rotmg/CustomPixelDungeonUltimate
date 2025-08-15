@@ -35,13 +35,13 @@
   "max_lvl": 27,
   "evasion": 20,
   "speed": 0.33,
-  "accuracy": 40,
-  "min_damage": 50,
-  "max_damage": 75,
+  "accuracy": 100,
+  "min_damage": 60,
+  "max_damage": 100,
   "min_armor": 5,
   "max_armor": 10,
   "loot": {
     "type": "spells.WildEnergy"
   },
-  "loot_chance": 0.1
+  "loot_chance": 0.075
 }

@@ -37,18 +37,18 @@
     ],
     "blood_color": 1205
   },
-  "hp": 50,
+  "hp": 55,
   "exp": 10,
-  "max_lvl": 23,
+  "max_lvl": 20,
   "evasion": 10,
   "speed": 1,
   "accuracy": 5,
-  "min_damage": 20,
-  "max_damage": 40,
+  "min_damage": 25,
+  "max_damage": 45,
   "min_armor": 25,
   "max_armor": 40,
   "loot": {
     "type": "potions.PotionOfExperience"
   },
-  "loot_chance": 0.05
+  "loot_chance": 0.02
 }

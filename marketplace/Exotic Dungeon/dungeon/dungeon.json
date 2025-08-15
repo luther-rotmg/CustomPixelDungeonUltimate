@@ -18,7 +18,6 @@
         "Albino",
         "Albino",
         "Albino",
-        "blackmamba",
         "blackmamba"
       ]
     },
@@ -38,6 +37,7 @@
         "Albino",
         "Albino",
         "undeadgnoll",
+        "undeadgnoll",
         "blackmamba"
       ]
     },
@@ -55,7 +55,6 @@
       "passage": "1",
       "bestiary": [
         "Albino",
-        "blackmamba",
         "blackmamba",
         "undeadgnoll",
         "undeadgnoll",
@@ -78,12 +77,10 @@
       "passage": "1",
       "bestiary": [
         "firefly",
-        "blackmamba",
         "fiddlercrab",
         "fiddlercrab",
         "CausticSlime",
         "CausticSlime",
-        "undeadgnoll",
         "undeadgnoll"
       ],
       "rare_mob": "Bandit"
@@ -124,7 +121,6 @@
         "hauntedcorpse",
         "hauntedcorpse",
         "Bandit",
-        "Bandit",
         "firefly"
       ]
     },
@@ -145,10 +141,7 @@
         "hauntedcorpse",
         "hauntedcorpse",
         "Bandit",
-        "Bandit",
         "ghostlyguard",
-        "ghostlyguard",
-        "dm101",
         "dm101"
       ]
     },
@@ -170,11 +163,8 @@
         "Bandit",
         "ghostlyguard",
         "ghostlyguard",
-        "ghostlyguard",
         "dm101",
         "dm101",
-        "dm101",
-        "SpectralNecromancer",
         "SpectralNecromancer"
       ]
     },
@@ -200,7 +190,7 @@
         "SpectralNecromancer",
         "SpectralNecromancer"
       ],
-      "rare_mob": "vampire"
+      "rare_mob": "ArmoredBrute"
     },
     "10": {
       "depth": 10,
@@ -236,12 +226,8 @@
       "bestiary": [
         "vampire",
         "vampire",
-        "vampire",
-        "vampire",
         "Bat",
         "ArmoredBrute",
-        "ArmoredBrute",
-        "huntergnoll",
         "huntergnoll"
       ]
     },
@@ -262,9 +248,12 @@
         "vampire",
         "Bat",
         "ArmoredBrute",
+        "ArmoredBrute",
+        "ArmoredBrute",
+        "ArmoredBrute",
         "huntergnoll",
         "huntergnoll",
-        "huntergnoll",
+        "tarantula",
         "tarantula"
       ]
     },
@@ -283,8 +272,6 @@
       "bestiary": [
         "vampire",
         "ArmoredBrute",
-        "ArmoredBrute",
-        "huntergnoll",
         "huntergnoll",
         "huntergnoll",
         "tarantula",
@@ -315,7 +302,7 @@
         "DM201",
         "DM201"
       ],
-      "rare_mob": "olddwarf"
+      "rare_mob": "Senior"
     },
     "15": {
       "depth": 15,
@@ -351,8 +338,8 @@
       "bestiary": [
         "olddwarf",
         "olddwarf",
+        "olddwarf",
         "multielemental",
-        "masterwarlock",
         "masterwarlock"
       ]
     },
@@ -370,12 +357,9 @@
       "passage": "16",
       "bestiary": [
         "olddwarf",
-        "olddwarf",
-        "multielemental",
         "multielemental",
         "multielemental",
         "Senior",
-        "masterwarlock",
         "masterwarlock"
       ]
     },
@@ -394,13 +378,17 @@
       "bestiary": [
         "olddwarf",
         "olddwarf",
-        "olddwarf",
         "pukhrajguard",
         "pukhrajguard",
+        "Golem",
         "multielemental",
         "multielemental",
         "Senior",
         "Senior",
+        "Senior",
+        "Senior",
+        "masterwarlock",
+        "masterwarlock",
         "masterwarlock",
         "masterwarlock"
       ]
@@ -418,16 +406,24 @@
       "chasm": "20",
       "passage": "16",
       "bestiary": [
+        "Golem",
+        "pukhrajguard",
+        "pukhrajguard",
+        "pukhrajguard",
         "pukhrajguard",
         "pukhrajguard",
         "Senior",
         "Senior",
-        "olddwarf",
+        "Senior",
+        "Senior",
+        "masterwarlock",
+        "masterwarlock",
+        "masterwarlock",
         "masterwarlock",
         "multielemental",
         "multielemental"
       ],
-      "rare_mob": "unknown"
+      "rare_mob": "Acidic"
     },
     "20": {
       "depth": 20,
@@ -465,9 +461,6 @@
         "unknown",
         "unknown",
         "unknown",
-        "unknown",
-        "unknown",
-        "whiteeye",
         "whiteeye",
         "whiteeye",
         "tentacle"
@@ -489,9 +482,7 @@
       "bestiary": [
         "unknown",
         "unknown",
-        "unknown",
         "tentacle",
-        "whiteeye",
         "whiteeye",
         "whiteeye"
       ]
@@ -535,7 +526,6 @@
         "unknown",
         "whiteeye",
         "whiteeye",
-        "Acidic",
         "Acidic",
         "Acidic",
         "Acidic",

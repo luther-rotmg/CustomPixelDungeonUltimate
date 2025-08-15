@@ -34,7 +34,7 @@
   },
   "hp": 25,
   "exp": 6,
-  "max_lvl": 14,
+  "max_lvl": 13,
   "evasion": 10,
   "speed": 1,
   "accuracy": 15,
@@ -45,7 +45,7 @@
   "loot": {
     "type": "LiquidMetal",
     "quantity_min": 5,
-    "quantity_max": 15
+    "quantity_max": 10
   },
   "loot_chance": 0.15,
   "enchantments": [

@@ -47,6 +47,7 @@
   "loot": {
     "type": "spells.FeatherFall"
   },
-  "loot_chance": 0.05,
-  "flying": true
+  "loot_chance": 0.04,
+  "flying": true,
+  "death_yell": true
 }

@@ -65,5 +65,5 @@
   "loot": {
     "type": "rings.RingOfEvasion"
   },
-  "loot_chance": 0.015
+  "loot_chance": 0.01
 }
