@@ -11,7 +11,7 @@
 
 **Sub-A (Fork infrastructure)** is shipped. Seven commits landed on `main` and pushed to origin. Both build paths verified green (Android APK 22.8 MB, Desktop JAR 45.9 MB). Final whole-branch review completed with one blocker (a "Dark Souls Mode" leak in the public roadmap table) plus four documentation mediums plus a small tail of nits; all fixed in the same commit that added this line.
 
-**Sub-B (Upstream sync to SPD v3.3.8)** design is approved and Slice 0 is planned. Full design spec at [docs/superpowers/specs/2026-07-22-cpdu-sub-b-upstream-sync-design.md](docs/superpowers/specs/2026-07-22-cpdu-sub-b-upstream-sync-design.md). Slice 0 implementation plan at [docs/superpowers/plans/2026-07-22-cpdu-sub-b-slice-0-foundation.md](docs/superpowers/plans/2026-07-22-cpdu-sub-b-slice-0-foundation.md). Eight architectural decisions locked during the 2026-07-22 brainstorm: Cleric first-class + Vault first-class + full 30-pack green-gate + DSL freeze + save bridge + iOS deferred + SPD tilemap edits win + 14 slices with sub-splits. Total estimate 252-328 tasks across 14 slices. Slice 0 scaffolds the shared infrastructure (bridge, tooling, smoke-boot); Slices 1-7 plans get authored just-in-time as each slice begins.
+**Sub-B (Upstream sync to SPD v3.3.8)** Slice 0 is shipped; Slice 1 is next. Full design spec at [docs/superpowers/specs/2026-07-22-cpdu-sub-b-upstream-sync-design.md](docs/superpowers/specs/2026-07-22-cpdu-sub-b-upstream-sync-design.md). Slice 0 implementation plan at [docs/superpowers/plans/2026-07-22-cpdu-sub-b-slice-0-foundation.md](docs/superpowers/plans/2026-07-22-cpdu-sub-b-slice-0-foundation.md). Eight architectural decisions locked during the 2026-07-22 brainstorm: Cleric first-class + Vault first-class + full 30-pack green-gate + DSL freeze + save bridge + iOS deferred + SPD tilemap edits win + 14 slices with sub-splits. Total estimate 252-328 tasks across 14 slices. Slice 0 scaffolded the shared infrastructure (bridge, tooling, smoke-boot); Slices 1-7 plans get authored just-in-time as each slice begins.
 
 ---
 
@@ -20,7 +20,7 @@
 | Sub | Name | Status | Blockers / Notes |
 |---|---|---|---|
 | A | Fork infrastructure | ✅ shipped | Seven commits on origin, both builds verified, final review clean after one fix commit. |
-| B | Upstream sync (CPD → SPD v3.3.8) | 🟡 design approved, Slice 0 planned, execution pending | 14 slices with sub-splits, 252-328 tasks total. All 8 architectural decisions locked. Slice 0 scaffolds infra; Slices 1-7 planned just-in-time. |
+| B | Upstream sync (CPD → SPD v3.3.8) | 🟡 Slice 0 shipped, Slice 1 next | 14 slices total. Slice 0 scaffolds bridge + tools + smoke-boot. |
 | C | Broad modding-platform API | ⚪ not started | Blocked on Sub-B ship |
 | D | God Mode addon | ⚪ | Blocked on Sub-C |
 | E | Hard Mode addon | ⚪ | Blocked on Sub-C |
@@ -34,6 +34,9 @@
 ---
 
 ## Recent activity
+
+**2026-07-22 (Sub-B Slice 0 execution session):**
+- Sub-B Slice 0 shipped: `services/tools/{api-diff,pack-smoke,smoke-boot}/` + `SPD-classes/src/main/java/com/watabou/utils/BundleBridge*` + SLICE-TEMPLATE.md + `:ios` cleanup.
 
 **2026-07-21 (Sub-A execution session):**
 - Sub-A brainstorm + design spec + implementation plan

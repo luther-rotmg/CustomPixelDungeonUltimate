@@ -48,6 +48,18 @@ Sub-A Task 5 (`./gradlew android:assembleDebug && ./gradlew desktop:release` mus
 - CI setup (GitHub Actions, etc.) — deferred to Sub-G.
 - iOS build — retained in `settings.gradle` for future reactivation, currently unmaintained on paper (see README platform support table).
 
+### Sub-B Slice 0: Foundation
+
+- `services/tools/api-diff/`: API-diff auditor CLI. Compares two git refs' Java surface (public / protected symbols across a file glob). Exit 1 on removals / signature-changes. Invocable via `./gradlew apiDiff --args="--base <ref> --head <ref>"`.
+- `services/tools/pack-smoke/`: pack boot-smoke harness (structural). Validates every marketplace pack's manifest + asset references without booting the game runtime. Baseline: 29/29 GREEN at fork base (log at `docs/superpowers/research/pack-smoke-baseline-2026-07-22.log`). Note: `marketplace/Summary/` is storefront listing metadata with no `mod_info.json`, correctly excluded by pack-smoke validation.
+- `services/tools/smoke-boot/`: headless Android smoke-boot scripts (pwsh + bash). Boots the AVD, installs the debug APK, confirms process is alive 10 seconds post-launch. Not wired to CI (Sub-G); callable manually and by future CI setup.
+- `SPD-classes/src/main/java/com/watabou/utils/BundleBridge.java`: save-compat bridge scaffolding. Version detection + translator chain (`PreV232Translator`, `PreV242Translator`, `PreV254Translator` — all stubs in Slice 0, populated in Slices 3a / 5b / 6c). `BundleBridgeException` for unrecognized formats.
+- `SPD-classes/src/test/java/com/watabou/utils/BundleBridgeTest.java`: JUnit 5 harness. 5 tests, 5 passing. Synthetic fixture for Slice 0; real .dat fixtures deferred to Slices 3a / 5b / 6c.
+- `docs/superpowers/plans/SLICE-TEMPLATE.md`: acceptance-block template referenced by every future Sub-B slice plan.
+- `settings.gradle`: deleted dangling `include ':ios'` entry.
+
+Sub-B Slice 0 acceptance gates: all seven green as of merge.
+
 ### Known caveats
 
 - The annotated tag `cpd-sync-base-2025-08-15` was pushed to origin during Sub-A Task 2 (implementer overreach — the plan brief said "no push" at Task 2, push was for Task 6). Effect: Task 6's tag-push step becomes a no-op. Documented and accepted; no corrective delete on origin (would double the GitHub webhook events for no user-visible difference).
