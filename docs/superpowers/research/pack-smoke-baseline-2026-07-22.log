@@ -1,0 +1,100 @@
+Sub-B Slice 0 / Task 6 — pack boot-smoke baseline
+==================================================
+
+Command:
+  pwsh -NoProfile -Command "Set-Location 'C:\Users\minec\Documents\Projects\CustomPixelDungeonUltimate'; & .\gradlew.bat packSmoke --no-daemon > pack-smoke-baseline.log 2>&1"
+  (JAVA_HOME pinned to the JDK 17 Microsoft build, per the Task 4 environment
+  note, since the ambient default JDK does not satisfy the Android Gradle
+  Plugin 7.4.2 toolchain requirement.)
+
+Result: exit 0. Every probed pack GREEN.
+
+NOTE on pack count — 29/29 GREEN, not 30/30
+---------------------------------------------
+`marketplace/` has 30 top-level subdirectories, but only 29 of them are
+actual packs. The 30th, `marketplace/Summary/`, is marketplace-listing
+metadata (a per-pack `<name>.json` summary blurb plus preview `.png`
+screenshots for the storefront UI) — it has no `mod_info.json` of its own.
+
+PackSmokeCli's iteration rule (Step 1 of the brief) is "for each subdirectory
+containing mod_info.json, invoke probe" — exactly the rule that correctly
+excludes `Summary/` here. This is not a probe failure; `Summary/` was never
+a pack to begin with. The brief's "30 shipped marketplace packs" framing
+was an off-by-one over the raw subdirectory count, not a claim about
+`Summary/`'s status.
+
+Verified: none of the 29 real `mod_info.json` manifests declare an `assets`
+array, so `PackLoaderProbe`'s asset-existence check never triggers in this
+baseline — every pack that satisfies the three required manifest fields
+(`name`, `version`, `min_cpd_version`) passes on the manifest-shape check
+alone. All 29 do.
+
+Slice 7 followup note: if a future pack adds an `assets` array (or if
+`Summary/` is ever restructured to look pack-shaped), re-verify this
+baseline — the current 29/29 GREEN result reflects the manifest-only
+shape of the marketplace as of 2026-07-22.
+
+Raw gradle output
+------------------
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.5/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+
+> Configure project :android
+Configuration 'natives' was resolved during configuration time.
+This is a build performance and scalability issue.
+See https://github.com/gradle/gradle/issues/2298
+Run with --info for a stacktrace.
+
+The Kotlin Gradle plugin was loaded multiple times in different subprojects, which is not supported and may break the build.
+This might happen in subprojects that apply the Kotlin plugins with the Gradle 'plugins { ... }' DSL if they specify explicit versions, even if the versions are equal.
+Please add the Kotlin plugin to the common parent project or the root project, then remove the versions in the subprojects.
+If the parent project does not need the plugin, add 'apply false' to the plugin line.
+See: https://docs.gradle.org/current/userguide/plugins.html#sec:subprojects_plugins_dsl
+The Kotlin plugin was loaded in the following projects: ':android', ':core'
+
+> Task :services:tools:pack-smoke:compileJava
+> Task :services:tools:pack-smoke:processResources NO-SOURCE
+> Task :services:tools:pack-smoke:classes
+
+> Task :packSmoke
+Pack boot-smoke: marketplace
+Bullet Cruncher: GREEN
+Cape of Thorns: GREEN
+Clear UI: GREEN
+Cursed Beginning: GREEN
+Dew Vial: GREEN
+Dried Grass: GREEN
+Dungeon Bosses Redrawn: GREEN
+Exotic Dungeon: GREEN
+FiveExit: GREEN
+Hollow Dungeon: GREEN
+Huntress Handmade Cloak: GREEN
+Jowiro's Class Reskins: GREEN
+JustThe'Facts: GREEN
+Language Patch: GREEN
+Little Dragons!: GREEN
+Modern Starter Pack: GREEN
+More Mobs: GREEN
+MorStor: GREEN
+Old Potions: GREEN
+Rat Potions: GREEN
+Rocc: GREEN
+Rogue-cut: GREEN
+Roxx: GREEN
+Slugcat skins: GREEN
+Starter Pack: GREEN
+Superior Knowledge: GREEN
+Terraria Wands: GREEN
+Totem Of Undying: GREEN
+Town: GREEN
+Total: 29/29 GREEN
+RESULT: PASS (all packs GREEN)
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.5/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 12s
+2 actionable tasks: 2 executed

@@ -49,3 +49,16 @@ task apiDiff(type: JavaExec) {
     classpath = project(':services:tools:api-diff').sourceSets.main.runtimeClasspath
     mainClass = 'com.qsr.customspd.tools.apidiff.ApiDiffCli'
 }
+
+// Force the pack-smoke subproject to configure itself (applying the 'java'
+// plugin and populating sourceSets) before the root project finishes
+// evaluating, since the packSmoke task below reads its runtime classpath.
+evaluationDependsOn(':services:tools:pack-smoke')
+
+task packSmoke(type: JavaExec) {
+    group = 'verification'
+    description = 'Run pack boot-smoke harness against marketplace/'
+    dependsOn ':services:tools:pack-smoke:compileJava'
+    classpath = project(':services:tools:pack-smoke').sourceSets.main.runtimeClasspath
+    mainClass = 'com.qsr.customspd.tools.packsmoke.PackSmokeCli'
+}
