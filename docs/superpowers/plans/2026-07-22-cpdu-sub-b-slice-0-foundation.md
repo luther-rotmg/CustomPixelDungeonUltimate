@@ -645,63 +645,91 @@ git commit -m "test(bridge): JUnit 5 harness + routing tests for BundleBridge (3
 
 ---
 
-### Task 9: Save-fixture extraction from live playtest save
+### Task 9: Synthetic save-fixture builder + roundtrip test
 
 **Files:**
-- Create: `SPD-classes/src/test/resources/save-fixtures/cpd-v2.1.0-1.0-sample.dat`
-- Create: `SPD-classes/src/test/resources/save-fixtures/cpd-v2.1.0-1.0-sample.expected.json`
-- Modify: `SPD-classes/src/test/java/com/watabou/utils/BundleBridgeTest.java` (add fixture-based test)
+- Create: `SPD-classes/src/test/java/com/watabou/utils/BundleFixtureBuilder.java` (test-scope helper)
+- Modify: `SPD-classes/src/test/java/com/watabou/utils/BundleBridgeTest.java` (add fixture-based roundtrip test)
 
 **Interfaces:**
-- Consumes: a live playtest save from CPD v2.1.0-1.0
-- Produces: pinned fixture files that regression-guard the bridge
+- Consumes: nothing (constructs synthetic `Bundle` programmatically)
+- Produces: reusable fixture-builder that Slices 3a / 5b / 6c can extend with real per-version save shapes
 
-**Note:** This task requires a manual playtest run. Automate what can be automated (fixture-based test), accept manual dependency for the fixture-collection step.
+**Design decision** (deviates from the design spec's `.dat`-file fixture approach): For Slice 0's routing-only tests, a synthetically-constructed `Bundle` covers everything the bridge scaffolding needs to verify. Real pinned `.dat` fixtures matter starting in Slice 3a when the first translator (`PreV232Translator`) needs actual save-format data to convert. Punting real fixtures to those slices eliminates the manual-playtest dependency from Slice 0 and lets it close atomically. Slice 3a's plan will include a `Task N: extract CPD v2.1.0-1.0 pinned save fixture from live playtest` step, at which point the manual playtest earns its keep because the fixture will actually exercise translation logic.
 
-- [ ] **Step 1: Extract a save from the current Desktop build**
+- [ ] **Step 1: Write failing test using synthetic fixture**
 
-Run the Desktop build from Sub-A:
-```
-pwsh -NoProfile -Command "$env:JAVA_HOME = [Environment]::GetEnvironmentVariable('JAVA_HOME','User'); Set-Location 'C:\Users\minec\Documents\Projects\CustomPixelDungeonUltimate'; & java -jar desktop/build/libs/desktop-2.1.0-1.0.jar"
-```
-
-Start a game, pick a hero, play until saving is possible (past floor 1). Save. Exit.
-
-Locate the save file. On Windows it lands at `%APPDATA%\CustomPixelDungeonUltimate\` or similar (varies by CPD's actual save-path config; check `SPDSettings.java` for the actual path constant if unclear).
-
-Copy the save file into `SPD-classes/src/test/resources/save-fixtures/cpd-v2.1.0-1.0-sample.dat`.
-
-- [ ] **Step 2: Load the fixture in Java to derive the expected JSON**
-
-Write a one-off script (or add a temp `main()` method) that reads the fixture, deserializes it via `Bundle.read(FileInputStream)`, walks the result, and prints it as JSON. Save the output as `cpd-v2.1.0-1.0-sample.expected.json` in the same directory.
-
-- [ ] **Step 3: Add fixture-based test**
-
-Extend `BundleBridgeTest.java`:
+Add to `BundleBridgeTest.java`:
 
 ```java
 @Test
-void upcastFromFixtureRoundtrips() throws Exception {
-    try (InputStream in = getClass().getResourceAsStream("/save-fixtures/cpd-v2.1.0-1.0-sample.dat")) {
-        assertNotNull(in, "fixture missing");
-        Bundle b = Bundle.read(in);
-        Bundle upcast = BundleBridge.upcast(b, "cpd-v2.1.0-1.0");
-        assertNotNull(upcast);
-        // Slice 0 stubs are passthroughs; deeper assertions land in Slices 3a/5b/6c
-        // when translators are populated. For now, just prove non-null round-trip.
+void upcastFromSyntheticCpdV21FixtureRoundtrips() throws Exception {
+    Bundle b = BundleFixtureBuilder.cpdV21Sample();
+    Bundle upcast = BundleBridge.upcast(b, "cpd-v2.1.0-1.0");
+    assertNotNull(upcast);
+    // Slice 0 stubs are passthroughs; deeper assertions land in Slices 3a/5b/6c
+    // when translators are populated. For now, just prove non-null round-trip
+    // through the full translator chain.
+    assertEquals(b.getString("version"), upcast.getString("version"),
+        "passthrough stubs preserve the version field verbatim");
+}
+```
+
+- [ ] **Step 2: Run test to verify fail**
+
+```
+pwsh -NoProfile -Command "$env:JAVA_HOME = [Environment]::GetEnvironmentVariable('JAVA_HOME','User'); Set-Location 'C:\Users\minec\Documents\Projects\CustomPixelDungeonUltimate'; & .\gradlew.bat SPD-classes:test --no-daemon"
+```
+
+Expected: FAIL (`BundleFixtureBuilder` does not exist).
+
+- [ ] **Step 3: Implement BundleFixtureBuilder**
+
+Create `SPD-classes/src/test/java/com/watabou/utils/BundleFixtureBuilder.java`:
+
+```java
+package com.watabou.utils;
+
+/**
+ * Test-scope helper that constructs synthetic Bundle instances resembling
+ * historic CPD/SPD save formats. Slice 0 ships only a v2.1.0-1.0 stub;
+ * later slices (3a/5b/6c) extend this with per-version fixtures that
+ * translator implementations validate against.
+ *
+ * The builder deliberately avoids depending on live playtest saves so
+ * Slice 0 can close atomically without manual-playtest coordination.
+ * Real .dat-file fixtures land in the slice whose translator needs them.
+ */
+public final class BundleFixtureBuilder {
+
+    private BundleFixtureBuilder() {}
+
+    /**
+     * Minimal synthetic Bundle shaped like a CPD v2.1.0-1.0 save.
+     * Contains only enough fields to exercise BundleBridge's version
+     * detection and translator-chain routing. Not intended as a
+     * realistic playtest save (that comes in Slice 3a).
+     */
+    public static Bundle cpdV21Sample() {
+        Bundle b = new Bundle();
+        b.put("version", "cpd-v2.1.0-1.0");
+        b.put("depth", 1);
+        b.put("seed", 12345L);
+        b.put("gold", 0);
+        return b;
     }
 }
 ```
 
 - [ ] **Step 4: Run tests to verify pass**
 
-Same gradle command as Task 8. Expected: 4 tests, 4 passing.
+Same gradle command. Expected: 4 tests, 4 passing.
 
 - [ ] **Step 5: Commit**
 
 ```
-git add SPD-classes/src/test/resources/save-fixtures/cpd-v2.1.0-1.0-sample.dat SPD-classes/src/test/resources/save-fixtures/cpd-v2.1.0-1.0-sample.expected.json SPD-classes/src/test/java/com/watabou/utils/BundleBridgeTest.java
-git commit -m "test(bridge): pin CPD v2.1.0-1.0 save fixture + fixture-based routing test"
+git add SPD-classes/src/test/java/com/watabou/utils/BundleFixtureBuilder.java SPD-classes/src/test/java/com/watabou/utils/BundleBridgeTest.java
+git commit -m "test(bridge): synthetic v2.1.0-1.0 fixture builder + roundtrip test (real .dat fixtures land in Slice 3a)"
 ```
 
 ---
