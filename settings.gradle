@@ -14,3 +14,5 @@ include ':services'
     //news
     include ':services:news:debugNews'
     include ':services:news:shatteredNews'
+    //tools
+    include ':services:tools:api-diff'
