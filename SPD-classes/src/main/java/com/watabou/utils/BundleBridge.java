@@ -34,9 +34,9 @@ import java.util.List;
  * passthrough stubs; real per-version translation logic lands in Slices
  * 3a / 5b / 6c as SPD's corresponding save-compat drops are ported.
  *
- * Slice 0 note: this method intentionally does NOT declare a checked
- * exception. Task 12 introduces {@code BundleBridgeException} plus a
- * version-whitelist gate and refactors this signature to throw it.
+ * Slice 0: {@link #upcast(Bundle, String)} declares {@link BundleBridgeException}
+ * and gates on a version whitelist before the translator chain fires;
+ * unrecognized save formats are rejected rather than silently mishandled.
  */
 public final class BundleBridge {
 
@@ -50,13 +50,19 @@ public final class BundleBridge {
 
 	/**
 	 * Upcast a Bundle from a legacy CPD/SPD version to the current format.
+	 * The detected/declared version is checked against a whitelist before
+	 * the chain fires; unrecognized formats throw {@link BundleBridgeException}
+	 * rather than risk mishandling an unknown save layout.
 	 * The chain fires each translator whose target version is greater than the sourceVersion.
 	 * If sourceVersion is null or unrecognized, attempts signature-heuristic detection.
 	 */
-	public static Bundle upcast( Bundle input, String sourceVersion ) {
+	public static Bundle upcast( Bundle input, String sourceVersion ) throws BundleBridgeException {
 		String detected = (sourceVersion == null || sourceVersion.isEmpty())
 				? detectVersion( input )
 				: sourceVersion;
+		if (!isKnownVersion( detected )) {
+			throw new BundleBridgeException( "unsupported save format: " + detected );
+		}
 		Bundle current = input;
 		for (BundleTranslator t : CHAIN) {
 			if (versionLessThan( detected, t.targetVersion() )) {
@@ -65,6 +71,18 @@ public final class BundleBridge {
 			}
 		}
 		return current;
+	}
+
+	/**
+	 * Version-whitelist gate: only formats the bridge knows how to route
+	 * (or the {@code "unknown"} sentinel from {@link #detectVersion(Bundle)})
+	 * are allowed through to the translator chain.
+	 */
+	private static boolean isKnownVersion( String version ) {
+		return version.startsWith( "cpd-" )
+				|| version.startsWith( "v2." )
+				|| version.startsWith( "v3." )
+				|| version.equals( "unknown" );
 	}
 
 	private static String detectVersion( Bundle b ) {

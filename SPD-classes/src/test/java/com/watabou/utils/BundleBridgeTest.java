@@ -42,4 +42,12 @@ class BundleBridgeTest {
         assertEquals(b.getString("version"), upcast.getString("version"),
             "passthrough stubs preserve the version field verbatim");
     }
+
+    @Test
+    void upcastThrowsBundleBridgeExceptionForUnrecognizedVersion() {
+        Bundle b = new Bundle();
+        b.put("version", "unknown-fork-v99");
+        assertThrows(BundleBridgeException.class,
+            () -> BundleBridge.upcast(b, "unknown-fork-v99"));
+    }
 }
