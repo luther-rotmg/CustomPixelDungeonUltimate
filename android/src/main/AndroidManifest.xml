@@ -23,6 +23,7 @@
 		android:xlargeScreens="true"/>
 
 	<application
+		android:name="androidx.multidex.MultiDexApplication"
 		android:icon="@mipmap/ic_launcher"
 		android:label="${appName}"
 		android:theme="@android:style/Theme.Black.NoTitleBar"

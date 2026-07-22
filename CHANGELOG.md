@@ -30,6 +30,18 @@ Work-in-progress on `main` since the fork base (`cpd-sync-base-2025-08-15`, CPD 
 
 - Default branch renamed `margarita` (inherited from CPD's cocktail-codename scheme) → `main` on both local and origin, per LO decision during Sub-A execution. Remote-tracking branches for upstream-cpd stay on `margarita` (that's QSR's naming, we don't own it); upstream-spd stays on `master` (Evan's naming). Sub-B will `git merge upstream-cpd/margarita` and `upstream-spd/master` into our `main`.
 
+### Fixed — Sub-A build-baseline hotfix
+
+Sub-A Task 5 (`./gradlew android:assembleDebug && ./gradlew desktop:release` must both pass) discovered that CPD's fork-base commit `c97fb83` did not build out-of-the-box because of four independent layers of upstream rot. Each layer was fixed one at a time. Final state: **both builds pass** — `desktop-2.1.0-1.0.jar` (45.9 MB), `android-debug.apk` (22.8 MB). Under LO's `Task 5 unblock` and `Android unblock` decisions:
+
+- **`build.gradle`** — pinned `gdxControllersVersion` from `'2.2.4-SNAPSHOT'` → `'2.2.3'`. The SNAPSHOT dep had expired from Google Maven, Maven Central, and Sonatype OSS Snapshots. 2.2.3 is the latest real gdx-controllers release (April 2023; 2.2.4 was never cut, existed only as SNAPSHOT).
+- **`android/build.gradle`** — added `multiDexEnabled true` to `defaultConfig` + `implementation "androidx.multidex:multidex:2.0.1"` to `dependencies`. Fixes DEX 64K method-reference limit exposed after the pin unblocked dependency resolution. Standard fix required for any moderately-sized libGDX + Kotlin + Android project with `minSdk < 21`.
+- **`android/src/main/AndroidManifest.xml`** — set `android:name="androidx.multidex.MultiDexApplication"` on the `<application>` element (CPD had no custom Application class, so extending MultiDexApplication via the manifest is the minimal path — no new Java code required).
+- **`gradle.properties`** — added `android.useAndroidX=true`. Required by AGP once any `androidx.*` dependency is on the classpath. `enableJetifier` NOT needed (repo has zero `com.android.support` refs).
+- **`desktop:dist` task name corrections** — the Sub-A plan brief, imported design spec, imported Sub-A plan, and README all documented `./gradlew desktop:dist` as the Desktop build command. CPD's `desktop/build.gradle` has no `dist` task — the correct task is `desktop:release` (custom `Jar`-type task at `desktop/build.gradle:31`). Corrected in README, `docs/superpowers/specs/`, and `docs/superpowers/plans/`.
+
+**Sub-B implication:** SPD v3.2 bumps `minSdk` to 21, at which point native Android multidex takes over and the `androidx.multidex` dep becomes unnecessary (revisit during that slice). SPD v3.2 / v3.3 also bump `libGDX` to `1.13.6-SNAPSHOT` and `1.14.0` respectively, which will resolve gdx-controllers to a more recent version — the 2.2.3 pin is interim.
+
 ### Deferred (not this sub-project)
 
 - Any change to game code under `core/`, `android/`, `desktop/`, `ios/`, `services/`, `SPD-classes/`, or `marketplace/` — Sub-A is docs-only. Game code changes begin in Sub-B (upstream sync to SPD v3.3.8).
@@ -39,12 +51,13 @@ Work-in-progress on `main` since the fork base (`cpd-sync-base-2025-08-15`, CPD 
 ### Known caveats
 
 - The annotated tag `cpd-sync-base-2025-08-15` was pushed to origin during Sub-A Task 2 (implementer overreach — the plan brief said "no push" at Task 2, push was for Task 6). Effect: Task 6's tag-push step becomes a no-op. Documented and accepted; no corrective delete on origin (would double the GitHub webhook events for no user-visible difference).
-- **Upstream build broken at fork base**: Sub-A's Task 5 (gradle Android + Desktop verification) discovered that CPD's `build.gradle` at commit c97fb83 references `gdxControllersVersion = '2.2.4-SNAPSHOT'` (Maven SNAPSHOT dependency on `com.badlogicgames.gdx-controllers`). SNAPSHOT deps expire; this one no longer resolves from Google Maven, Maven Central, or Sonatype OSS Snapshots. Both `./gradlew android:assembleDebug` (fails in ~1m) and `./gradlew desktop:dist` (fails in ~11s) fail with `Could not find com.badlogicgames.gdx-controllers:gdx-controllers-<module>:2.2.4-SNAPSHOT`. **Sub-A did not touch any gradle file** — this is pre-existing upstream rot. Options for resolution await LO decision; Sub-B's absorption of SPD v3.2 (libGDX 1.13.6) or v3.3 (libGDX 1.14) will naturally update gdx-controllers to a resolvable release version, so the "true fix" is to defer to Sub-B. Interim options: pin `gdxControllersVersion` to a real release (`2.2.4` without the `-SNAPSHOT`, or `2.2.3`), or vendor a local jar. See Sub-A execution log for full trace.
+- Sub-A's build-baseline hotfix (see "Fixed" above) modified `build.gradle`, `android/build.gradle`, `android/src/main/AndroidManifest.xml`, and `gradle.properties` — deviating from Sub-A's original "docs only, no gradle changes" scope. Deviation authorized by LO during execution under the `Task 5 unblock` (pin gdx-controllers) and `Android unblock` (enable multidex) decisions. Alternative was shipping Sub-A with an unbuildable baseline for Sub-B to inherit blindly. Total gradle+manifest diff: 9 lines across 4 files, all standard patterns from Android/libGDX best practice.
 
-### Deferred verifications (Task 5 partially blocked)
+### Build verification (both green as of this commit)
 
-- `./gradlew android:assembleDebug` — cannot verify build baseline until `gdx-controllers` SNAPSHOT is resolved (Sub-B or a targeted build.gradle patch)
-- `./gradlew desktop:dist` — same blocker (SPD-classes also depends on gdx-controllers-core)
+- `./gradlew android:assembleDebug` → `BUILD SUCCESSFUL in 38s` → `android/build/outputs/apk/debug/android-debug.apk` (22.8 MB)
+- `./gradlew desktop:release` → `BUILD SUCCESSFUL in 29s` → `desktop/build/libs/desktop-2.1.0-1.0.jar` (45.9 MB)
+- Environment: JDK 17 (Microsoft OpenJDK 17.0.19.10), Android SDK 33, build-tools 33.0.2, gradle wrapper 8.5
 
 ---
 

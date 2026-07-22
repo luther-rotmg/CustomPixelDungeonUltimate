@@ -91,7 +91,7 @@ Create the fork on GitHub, clone locally, wire up remotes, verify the base game 
 - `docs/superpowers/specs/2026-07-21-custompixeldungeonultimate-design.md` — this document, imported from scratchpad
 - Gradle sanity build verified:
   - `./gradlew android:assembleDebug` succeeds
-  - `./gradlew desktop:dist` succeeds
+  - `./gradlew desktop:release` succeeds
   - iOS deliberately NOT built (matches Sub-A scope decision)
 
 ### 4.3 Acceptance
@@ -120,7 +120,7 @@ Straight `git merge upstream-spd/master` would produce one gigantic un-auditable
 3. **Per-anchor merge loop.** For each anchor:
    - `git merge <anchor>` onto working branch
    - Resolve conflicts
-   - `./gradlew android:assembleDebug && ./gradlew desktop:dist` must both pass
+   - `./gradlew android:assembleDebug && ./gradlew desktop:release` must both pass
    - Run modmark regression (see 5.3) — every CPD-shipped mod loads
    - Commit with anchor tag in message
 4. **Escalation.** If any anchor's conflicts prove intractable at a hook site, defer that anchor and open a Sub-C hook-design ticket. Do not force-merge broken hook code.

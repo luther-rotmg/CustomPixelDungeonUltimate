@@ -162,7 +162,7 @@ Debug APK will be produced under `android/build/outputs/apk/debug/`.
 ### Desktop JAR
 
 ```
-./gradlew desktop:dist
+./gradlew desktop:release
 ```
 
 Runnable JAR will be produced under `desktop/build/libs/`.
