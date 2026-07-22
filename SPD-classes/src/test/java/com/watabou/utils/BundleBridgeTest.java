@@ -30,4 +30,16 @@ class BundleBridgeTest {
         Bundle result = BundleBridge.upcast(b, null);
         assertNotNull(result);
     }
+
+    @Test
+    void upcastFromSyntheticCpdV21FixtureRoundtrips() throws Exception {
+        Bundle b = BundleFixtureBuilder.cpdV21Sample();
+        Bundle upcast = BundleBridge.upcast(b, "cpd-v2.1.0-1.0");
+        assertNotNull(upcast);
+        // Slice 0 stubs are passthroughs; deeper assertions land in Slices 3a/5b/6c
+        // when translators are populated. For now, just prove non-null round-trip
+        // through the full translator chain.
+        assertEquals(b.getString("version"), upcast.getString("version"),
+            "passthrough stubs preserve the version field verbatim");
+    }
 }
