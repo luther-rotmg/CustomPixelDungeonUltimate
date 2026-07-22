@@ -36,3 +36,16 @@ allprojects {
     }
 
 }
+
+// Force the api-diff subproject to configure itself (applying the 'java'
+// plugin and populating sourceSets) before the root project finishes
+// evaluating, since the apiDiff task below reads its runtime classpath.
+evaluationDependsOn(':services:tools:api-diff')
+
+task apiDiff(type: JavaExec) {
+    group = 'verification'
+    description = 'Run API-diff auditor against a range (--args="--base <ref> --head <ref>")'
+    dependsOn ':services:tools:api-diff:compileJava'
+    classpath = project(':services:tools:api-diff').sourceSets.main.runtimeClasspath
+    mainClass = 'com.qsr.customspd.tools.apidiff.ApiDiffCli'
+}
