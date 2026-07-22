@@ -11,7 +11,7 @@
 
 **Sub-A (Fork infrastructure)** is shipped. Seven commits landed on `main` and pushed to origin. Both build paths verified green (Android APK 22.8 MB, Desktop JAR 45.9 MB). Final whole-branch review completed with one blocker (a "Dark Souls Mode" leak in the public roadmap table) plus four documentation mediums plus a small tail of nits; all fixed in the same commit that added this line.
 
-**Sub-B (Upstream sync to SPD v3.3.8)** is in the planning stage. Pre-brainstorm research is complete: see [Sub-B preliminary research](docs/superpowers/research/sub-b-preliminary-research.md) for the full picture. Headline: CPD is on SPD v2.1.0 (frozen since May 2023), so Sub-B absorbs roughly 1,417 upstream commits across five SPD minor versions. Adversarial verify revised the task estimate from 148 to **220-290**. Eight architectural brainstorm questions await LO answers before Sub-B implementation begins.
+**Sub-B (Upstream sync to SPD v3.3.8)** design is approved and Slice 0 is planned. Full design spec at [docs/superpowers/specs/2026-07-22-cpdu-sub-b-upstream-sync-design.md](docs/superpowers/specs/2026-07-22-cpdu-sub-b-upstream-sync-design.md). Slice 0 implementation plan at [docs/superpowers/plans/2026-07-22-cpdu-sub-b-slice-0-foundation.md](docs/superpowers/plans/2026-07-22-cpdu-sub-b-slice-0-foundation.md). Eight architectural decisions locked during the 2026-07-22 brainstorm: Cleric first-class + Vault first-class + full 30-pack green-gate + DSL freeze + save bridge + iOS deferred + SPD tilemap edits win + 14 slices with sub-splits. Total estimate 252-328 tasks across 14 slices. Slice 0 scaffolds the shared infrastructure (bridge, tooling, smoke-boot); Slices 1-7 plans get authored just-in-time as each slice begins.
 
 ---
 
@@ -20,7 +20,7 @@
 | Sub | Name | Status | Blockers / Notes |
 |---|---|---|---|
 | A | Fork infrastructure | ✅ shipped | Seven commits on origin, both builds verified, final review clean after one fix commit. |
-| B | Upstream sync (CPD → SPD v3.3.8) | 🟡 research done, brainstorm pending | 8 LO decisions needed; revised task estimate 220-290 across 8 slices |
+| B | Upstream sync (CPD → SPD v3.3.8) | 🟡 design approved, Slice 0 planned, execution pending | 14 slices with sub-splits, 252-328 tasks total. All 8 architectural decisions locked. Slice 0 scaffolds infra; Slices 1-7 planned just-in-time. |
 | C | Broad modding-platform API | ⚪ not started | Blocked on Sub-B ship |
 | D | God Mode addon | ⚪ | Blocked on Sub-C |
 | E | Hard Mode addon | ⚪ | Blocked on Sub-C |
@@ -67,7 +67,7 @@
 
 ## Awaiting LO input
 
-- **Sub-B brainstorm** — 8 architectural questions pre-loaded (Cleric ship-status, custom-tile decision, save-compat policy, marketplace-mod gating, iOS scope, DSL freeze policy, Vault-area home, slice-count discipline). Opens after Sub-A ships.
+- **Sub-B Slice 0 execution** — plan at [docs/superpowers/plans/2026-07-22-cpdu-sub-b-slice-0-foundation.md](docs/superpowers/plans/2026-07-22-cpdu-sub-b-slice-0-foundation.md). Ready to run when LO greenlights. Suggested execution: subagent-driven-development (one PR-worth, ~15 tasks, ~1-2 sessions of work).
 - **Ultimate vision re-brainstorm** — LO explicitly deferred to "after Sub-B ships". Vision wave 1+2 already captured in frontier memory.
 
 ---
