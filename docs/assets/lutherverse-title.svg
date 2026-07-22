@@ -1,0 +1,67 @@
+<!-- Placeholder title card for Lutherverse.
+     Replace with real hero art when it's ready — keep the file path
+     (docs/assets/lutherverse-title.svg) so README doesn't need to change. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400" role="img" aria-label="Lutherverse — a roguelike descent">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f0322"/>
+      <stop offset="55%" stop-color="#241147"/>
+      <stop offset="100%" stop-color="#3a1a5c"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#f4c04a" stop-opacity="0.18"/>
+      <stop offset="70%" stop-color="#f4c04a" stop-opacity="0.02"/>
+      <stop offset="100%" stop-color="#f4c04a" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softshadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.55"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="400" fill="url(#bg)"/>
+  <rect width="1200" height="400" fill="url(#glow)"/>
+
+  <!-- Uzumaki-inspired spiral (upper right) -->
+  <g transform="translate(1030 90)" opacity="0.35" stroke="#d4a5ff" stroke-width="1.4" fill="none">
+    <path d="M 0 0 m -80,0 a 80,80 0 1,1 160,0 a 65,65 0 1,0 -130,0 a 50,50 0 1,1 100,0 a 35,35 0 1,0 -70,0 a 22,22 0 1,1 44,0 a 12,12 0 1,0 -24,0 a 6,6 0 1,1 12,0"/>
+  </g>
+
+  <!-- Spiral, lower left, smaller and dimmer -->
+  <g transform="translate(120 320)" opacity="0.18" stroke="#a1e5f5" stroke-width="1.2" fill="none">
+    <path d="M 0 0 m -45,0 a 45,45 0 1,1 90,0 a 36,36 0 1,0 -72,0 a 28,28 0 1,1 56,0 a 20,20 0 1,0 -40,0 a 13,13 0 1,1 26,0 a 7,7 0 1,0 -14,0"/>
+  </g>
+
+  <!-- Title: LUTHERVERSE -->
+  <g filter="url(#softshadow)">
+    <text x="600" y="200" text-anchor="middle" fill="#f4c04a"
+          font-family="'Trebuchet MS', 'Segoe UI', sans-serif"
+          font-weight="900" font-size="112" letter-spacing="8">
+      LUTHERVERSE
+    </text>
+  </g>
+
+  <!-- Divider -->
+  <line x1="380" y1="235" x2="820" y2="235" stroke="#f4c04a" stroke-opacity="0.35" stroke-width="1"/>
+
+  <!-- Subtitle -->
+  <text x="600" y="278" text-anchor="middle" fill="#e8dcc6"
+        font-family="'Trebuchet MS', 'Segoe UI', sans-serif"
+        font-style="italic" font-size="26" letter-spacing="3">
+    a cosmic-horror roguelike descent
+  </text>
+
+  <!-- Footer strip -->
+  <text x="600" y="345" text-anchor="middle" fill="#a790c6"
+        font-family="'Consolas', 'Courier New', monospace"
+        font-size="15" letter-spacing="2">
+    custom pixel dungeon ultimate  ·  gpl-3.0 fan project  ·  200 floors  ·  cameos  ·  coop
+  </text>
+
+  <!-- tiny placeholder tag, bottom-right -->
+  <text x="1180" y="388" text-anchor="end" fill="#5a4a72"
+        font-family="'Consolas', 'Courier New', monospace"
+        font-size="9" letter-spacing="1" opacity="0.6">
+    // placeholder — swap for real hero art
+  </text>
+</svg>
