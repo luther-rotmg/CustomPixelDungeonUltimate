@@ -1,17 +1,17 @@
 <p align="center">
-  <img src="docs/assets/lutherverse-title.svg" alt="Lutherverse — a cosmic-horror roguelike descent" width="820">
+  <img src="docs/assets/lutherverse-title.svg" alt="Lutherverse title card" width="820">
 </p>
 
 <h1 align="center">Lutherverse</h1>
 
 <p align="center">
-  <em>a 200-floor cosmic-horror roguelike descent, built on top of Shattered Pixel Dungeon</em>
+  <em>A 200-floor roguelike descent that keeps changing shape on you.</em>
 </p>
 
 <p align="center">
   <a href="LICENSE.txt"><img alt="License: GPL v3" src="https://img.shields.io/badge/license-GPL--3.0-blueviolet.svg"></a>
   <img alt="Status: pre-alpha" src="https://img.shields.io/badge/status-pre--alpha-orange.svg">
-  <img alt="Platforms: Android · Desktop" src="https://img.shields.io/badge/platforms-android%20%C2%B7%20desktop-lightgrey.svg">
+  <img alt="Platforms: Android and Desktop" src="https://img.shields.io/badge/platforms-android%20%C2%B7%20desktop-lightgrey.svg">
   <img alt="Base: SPD v3.3.8" src="https://img.shields.io/badge/base-SPD%20v3.3.8-informational.svg">
   <img alt="Java: 17+" src="https://img.shields.io/badge/java-17%2B-red.svg">
   <a href="https://github.com/luther-rotmg/CustomPixelDungeonUltimate/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/luther-rotmg/CustomPixelDungeonUltimate?style=social"></a>
@@ -22,11 +22,11 @@
 
 ## What is this
 
-**Lutherverse** *(repo: `CustomPixelDungeonUltimate`)* is a wildly ambitious fork-of-a-fork of [Shattered Pixel Dungeon](https://github.com/00-Evan/shattered-pixel-dungeon) built on top of [Custom Pixel Dungeon](https://github.com/QuasiStellar/custom-pixel-dungeon)'s marketplace-mod framework. The goal is a github cult classic — the roguelike that indie-game weirdos and cosmic-horror nerds pass around to each other with a knowing nod.
+Lutherverse (repo name: `CustomPixelDungeonUltimate`) is a fork of [Custom Pixel Dungeon](https://github.com/QuasiStellar/custom-pixel-dungeon), which is itself a fork of [Shattered Pixel Dungeon](https://github.com/00-Evan/shattered-pixel-dungeon). It uses CPD's marketplace-mod framework and extends the game on top of it. I want it to be the kind of project a small group of people obsess over for a long time.
 
-Shattered Pixel Dungeon is 25-ish floors of tight, replayable dungeon crawling. Lutherverse takes that engine and stretches it into a **200-floor descent** with wildly different feeling worlds — hyper-utopian futures with a twist, calm plains that go quiet-wrong, the Zanarkand you were never supposed to see — plus a story spine, cameos of characters you'll recognize, keyblades as their own weapon type, save zones, towns, sphere-grid progression, and coop with a friend on their phone.
+Shattered Pixel Dungeon is about 25 floors of tight, replayable dungeon crawling. Lutherverse stretches that into a 200-floor run that keeps shifting tone as it goes: a hyper-utopian future with something wrong underneath, a version of Zanarkand you weren't supposed to see, calm plains that stop feeling calm. There's a story running through the whole thing, cameos of characters you'll recognize, keyblades as their own weapon type, save zones between big fights, towns every ten floors, a sphere-grid progression system, and coop you can play with a friend on their phone.
 
-Junji Ito × HP Lovecraft for aesthetic. Bloodborne × FFX × KH2 for inspiration. Custom Pixel Dungeon for the modding framework. Written in Java on libGDX. GPLv3 all the way down.
+The mood is cosmic horror. Junji Ito and HP Lovecraft on the aesthetic side. Bloodborne, Final Fantasy X, and Kingdom Hearts 2 on the game-design side. Written in Java on libGDX, all GPLv3.
 
 ---
 
@@ -35,61 +35,65 @@ Junji Ito × HP Lovecraft for aesthetic. Bloodborne × FFX × KH2 for inspiratio
 <details open>
   <summary><strong>Core gameplay</strong></summary>
 
-- **200-floor dungeon** with unique changes and content the whole way up — 8× SPD's default depth
-- **Sphere-grid skill system** (FFX-inspired) — node-based, path-unlocked progression that replaces or wraps SPD's talent tree
-- **Toggleable turn-based combat mode** — play the classic real-time roguelike combat, or flip to FFX-style turn-based action-queue combat per run
-- **Save zones (KH2-style)** — checkpoint/rest rooms, with per-run toggles for healing on/off and whether they appear at all (hardcore mode)
-- **Towns every 10 floors** — buying, selling, trading, crafting, resting, quests. Over ~30-floor spans, ONE city can repeat with different quest steps, inventories, and events based on your earlier choices
-- **Keyblade weapon type** with a **dual-wield reward system** and a **Keybearer class** built around it. Meta-keyblades crafted from **orichalcum** as top-tier variants
+- 200 floors, about eight times what Shattered Pixel Dungeon runs by default, with new content the whole way up.
+- A sphere-grid skill system inspired by Final Fantasy X. Nodes unlock along paths and either replace or wrap Shattered's talent tree depending on how the refactor lands.
+- Combat is toggleable per run: the classic real-time roguelike mode Shattered ships, or a Final Fantasy X style turn-based action queue.
+- Save zones borrowed from Kingdom Hearts 2. Checkpoint rooms where you can rest. Two per-run toggles: whether they heal you, and whether they appear at all (that second one is the hardcore mode).
+- A town every ten floors for buying, selling, trading, crafting, resting, and quests. One city recurs for about thirty floors at a time and evolves as the player's choices reach back into it: different quest steps, different inventories, different events.
+- Keyblades as a real weapon type, not a subclass of swords. A dual-wield reward system feeds into a Keybearer hero class built around dual keyblades. Endgame variants are crafted from orichalcum.
+
 </details>
 
 <details>
   <summary><strong>Aesthetic direction</strong></summary>
 
-- **Cosmic horror**: Junji Ito (Uzumaki spirals, Tomie unsettling designs) + HP Lovecraft (existential dread, deep-ones, mythos creatures)
-- **Bloodborne**: chalice-dungeon-style procedural mini-dungeons, fountain-style shop, gothic ambient horror
-- **Final Fantasy X**: Zanarkand, Calm Lands, Sin as recurring apocalyptic threat, Aeons as summonable creatures, sphere grid
-- **Kingdom Hearts 2**: world-hopping between tonally distinct settings, keyblades, save-zone save/load flow
-- **Cameos**: Sora (KH), Doll (Bloodborne), Patches (FromSoft), Tidus + O'aka (FFX), plus light-touch nods to GTA · Warframe · Naruto · DBZ · Binding of Isaac
-- Every stretch of floors feels distinct — the dungeon changes on you the deeper you go
+- Cosmic horror: Junji Ito (Uzumaki spirals, Tomie's designs) and HP Lovecraft (existential dread, deep-ones, mythos creatures).
+- Bloodborne: chalice-dungeon-style procedural mini-dungeons, a fountain-shaped shop, gothic ambient horror.
+- Final Fantasy X: Zanarkand, the Calm Lands, Sin as a recurring apocalyptic threat, Aeons as summonable creatures, the sphere grid.
+- Kingdom Hearts 2: world-hopping between tonally distinct settings, keyblades, the save-zone save/load pattern.
+- Cameos: Sora (KH), the Doll (Bloodborne), Patches (FromSoft), Tidus and O'aka (FFX), plus lighter nods to GTA, Warframe, Naruto, DBZ, and Binding of Isaac.
+- Each stretch of floors feels distinct. The dungeon changes shape as it deepens.
+
 </details>
 
 <details>
   <summary><strong>Multiplayer</strong></summary>
 
-Two coop modes, serving very different sessions:
+Two coop modes for two kinds of session:
 
-- **Real-time coop** — nickname + create-a-room simplicity, no self-hosted servers. Lobby toggles which "cheat" addons are allowed (God-tier gear = cheat, Hard-mode / Bonfire-mode = fair).
-- **Turn-based Nestalgia-style coop** — party of 4 units split across players (1p=4, 2p=2 each, 4p=1). Async play with a friend on their phone; long-term quest oriented. Pairs with the turn-based combat mode above.
+- Real-time coop. Pick a nickname, make a room, no self-hosted servers. The lobby toggles which addons count as "cheats" and can be turned off (God-tier starter gear counts; Hard mode and Bonfire mode don't).
+- Turn-based coop inspired by Nestalgia. A four-unit party split across the players (one player controls all four, two players get two each, four players get one). Meant for async play with a friend on their phone. Pairs with the turn-based combat toggle above.
+
 </details>
 
 <details>
   <summary><strong>Community goodies</strong></summary>
 
-- **Leaderboards** for the intrepid
-- **Labeled seed sharing** — share a run as `seed COSMICNIGHTMARE-1`, not `seed 12345`
-- **Story spine + cutscenes/dialogues** all the way up 200 floors
-- Deep modding-platform API so the community can add their own biomes, mobs, weapons, and story branches
+- Leaderboards.
+- Labeled seed sharing: `seed COSMICNIGHTMARE-1` instead of `seed 12345`.
+- A story running through all 200 floors, with cutscenes and dialogue.
+- A modding-platform API so other people can add biomes, mobs, weapons, and story branches.
+
 </details>
 
 ---
 
 ## Roadmap
 
-Every substantive commit updates this section — treat it as ground truth for where the project is right now.
+Every substantive commit updates this section. It's the accurate current state, not a snapshot from a while ago.
 
 **Sub-projects (v0.1 track):**
 
 | Sub | Name | Status | Notes |
 |---|---|---|---|
-| A | Fork infrastructure | ✅ done | This repo. Attribution + docs + branch rename `margarita`→`main`. |
-| B | Upstream sync — CPD → SPD v3.3.8 | 🟡 planning | Bring the game engine current with Evan's latest. Merge-in-slices strategy. |
+| A | Fork infrastructure | ✅ done | This repo. Attribution, docs, branch rename `margarita` to `main`. |
+| B | Upstream sync (CPD to SPD v3.3.8) | 🟡 planning | Bring the game engine current with Evan's latest. Merge-in-slices strategy. |
 | C | Broad modding-platform API | ⏳ next | Java-hook API on top of CPD's JSON-manifest framework: cutscenes, dialogue, dual-wield, story flags, biome swapping, NPC insertion. |
 | D | God Mode addon | ⏳ | Top-tier starter gear. Flagged as "cheat" in coop lobby. |
 | E | Hard Mode addon | ⏳ | Balance tuning. Coop-fair. |
 | F | Bonfire Mode addon | ⏳ | Souls-ish permadeath modifiers. Coop-fair. (Public name; internal working title: Dark Souls Mode.) |
 
-**Post-v0.1 waves** (these need their own brainstorm passes — this list is the north star, not commitments):
+**Post-v0.1 waves.** These need their own brainstorm passes. The list below is a direction, not a commitment schedule.
 
 - Sphere Grid progression system
 - Keyblade weapon type · Keybearer class · dual-wield reward system
@@ -104,23 +108,23 @@ Every substantive commit updates this section — treat it as ground truth for w
 
 ---
 
-## Alpha testers, watchers, star-clickers — welcome
+## Alpha testers and watchers
 
-Nothing playable-new yet — the fork is at its base commit, awaiting Sub-B. But if any of the above sounds like the kind of thing you'd want to watch unfold: **★ Star this repo** to bookmark it, and **👁 Watch → Custom → Releases** if you'd like a ping when the first alpha ships. Follow-along energy makes cult classics.
+There's nothing new to play yet. The fork is at its base commit and Sub-B is next. If the roadmap sounds like something you want to see happen, starring the repo bookmarks it for later, and switching Watch to Custom then Releases will ping you when the first alpha ships.
 
-Issues welcome (bugs, feature ideas, "you should absolutely cameo X"). PRs currently not accepted — the modding API is not stable and every hook is subject to change. That will loosen up when Sub-C ships.
+Issues are welcome. Bugs, feature ideas, cameo suggestions, all fine. Pull requests aren't being accepted right now because the modding API isn't stable and every hook is likely to change. That loosens up when Sub-C ships.
 
 ---
 
 ## Attribution
 
-Under GPL-3.0, Lutherverse carries forward the full attribution chain:
+Lutherverse is GPL-3.0. It carries the attribution chain forward:
 
-- **Base game** — *Shattered Pixel Dungeon*, © Evan Debenham · [00-Evan/shattered-pixel-dungeon](https://github.com/00-Evan/shattered-pixel-dungeon)
-- **Modding framework** — *Custom Pixel Dungeon*, © QuasiStellar · [QuasiStellar/custom-pixel-dungeon](https://github.com/QuasiStellar/custom-pixel-dungeon)
-- **Predecessor** — *Pixel Dungeon*, © Watabou
+- Base game: *Shattered Pixel Dungeon* by Evan Debenham. [00-Evan/shattered-pixel-dungeon](https://github.com/00-Evan/shattered-pixel-dungeon).
+- Modding framework: *Custom Pixel Dungeon* by QuasiStellar. [QuasiStellar/custom-pixel-dungeon](https://github.com/QuasiStellar/custom-pixel-dungeon).
+- Predecessor: *Pixel Dungeon* by Watabou.
 
-See [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) for the full attribution chain and library notices (libGDX Apache 2.0, RoboVM/MobiVM GPLv2-with-Classpath-Exception, SPD-classes).
+See [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) for the full attribution chain and library notices (libGDX Apache 2.0, RoboVM/MobiVM GPLv2 with Classpath Exception, SPD-classes).
 
 Not affiliated with, endorsed by, or connected to any of the games or franchises Lutherverse takes creative inspiration from. Character cameos are non-commercial fan-project references.
 
@@ -128,9 +132,9 @@ Not affiliated with, endorsed by, or connected to any of the games or franchises
 
 ## License
 
-**GPL-3.0.** See [`LICENSE.txt`](LICENSE.txt).
+GPL-3.0. See [`LICENSE.txt`](LICENSE.txt).
 
-If you use or modify Lutherverse's code, your derivative work must also be GPL-3.0. That's the terms Evan set for Shattered Pixel Dungeon and we carry them forward faithfully.
+If you use or modify this code, your derivative work has to also be GPL-3.0. Those are the terms Evan set for Shattered Pixel Dungeon and we keep them.
 
 ---
 
@@ -138,9 +142,9 @@ If you use or modify Lutherverse's code, your derivative work must also be GPL-3
 
 | Platform | Status |
 |---|---|
-| **Android** | Supported — see build instructions below |
-| **Desktop** (Windows / macOS / Linux) | Supported — see build instructions below |
-| **iOS** | **Unmaintained.** The `:ios` Gradle module is retained in `settings.gradle` for future reactivation but is not built, tested, or shipped. |
+| **Android** | Supported. See build instructions below. |
+| **Desktop** (Windows / macOS / Linux) | Supported. See build instructions below. |
+| **iOS** | Unmaintained. The `:ios` Gradle module stays in `settings.gradle` in case a future contributor picks it back up, but nothing on this fork builds or tests it. |
 
 ---
 
@@ -149,7 +153,7 @@ If you use or modify Lutherverse's code, your derivative work must also be GPL-3
 ### Prerequisites
 
 - JDK 17+
-- Android SDK (for the Android build) — compile-SDK 33, build-tools 33.0.2
+- Android SDK for the Android build (compile-SDK 33, build-tools 33.0.2)
 
 ### Android APK
 
@@ -157,7 +161,7 @@ If you use or modify Lutherverse's code, your derivative work must also be GPL-3
 ./gradlew android:assembleDebug
 ```
 
-Debug APK will be produced under `android/build/outputs/apk/debug/`.
+The debug APK lands in `android/build/outputs/apk/debug/`.
 
 ### Desktop JAR
 
@@ -165,26 +169,24 @@ Debug APK will be produced under `android/build/outputs/apk/debug/`.
 ./gradlew desktop:release
 ```
 
-Runnable JAR will be produced under `desktop/build/libs/`.
+The runnable JAR lands in `desktop/build/libs/`.
 
 ---
 
 ## Modding
 
-The modding framework is currently the one Custom Pixel Dungeon ships — JSON manifest per mod, resource overrides, hero JSON merge semantics. See CPD's mod documentation until Sub-C's broader Java-hook API lands. When it does, reference documentation will live at [`docs/modding-api-v1.md`](docs/modding-api-v1.md).
+The modding framework is whatever Custom Pixel Dungeon ships right now: JSON manifest per mod, resource overrides, hero JSON merge semantics. Refer to CPD's mod documentation until Sub-C adds the broader Java-hook API. Once it does, its reference docs will live at [`docs/modding-api-v1.md`](docs/modding-api-v1.md).
 
 ---
 
 ## Development docs
 
-- **Changelog:** [`CHANGELOG.md`](CHANGELOG.md) — every substantive commit
-- **Project status:** [`PROJECT-STATUS.md`](PROJECT-STATUS.md) — near-term state, blockers, roadmap
-- Design specs: [`docs/superpowers/specs/`](docs/superpowers/specs/)
-- Implementation plans: [`docs/superpowers/plans/`](docs/superpowers/plans/)
-- Assets: [`docs/assets/`](docs/assets/)
-
-Living design docs. Living roadmap. Living project.
+- [CHANGELOG.md](CHANGELOG.md): every substantive commit.
+- [PROJECT-STATUS.md](PROJECT-STATUS.md): what I'm working on right now, what's blocking me, what's coming next.
+- [Design specs](docs/superpowers/specs/): sub-project design docs.
+- [Implementation plans](docs/superpowers/plans/): task-by-task plans for each sub-project.
+- [Assets](docs/assets/): images and design assets.
 
 <p align="center">
-  <sub>Lutherverse — a fan project by <a href="https://github.com/luther-rotmg">luther-rotmg</a> · built with love on top of Watabou → Evan → QSR</sub>
+  <sub>Lutherverse is a fan project by <a href="https://github.com/luther-rotmg">luther-rotmg</a>, built on top of Watabou, Evan, and QSR's work.</sub>
 </p>

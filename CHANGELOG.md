@@ -53,6 +53,10 @@ Sub-A Task 5 (`./gradlew android:assembleDebug && ./gradlew desktop:release` mus
 - The annotated tag `cpd-sync-base-2025-08-15` was pushed to origin during Sub-A Task 2 (implementer overreach — the plan brief said "no push" at Task 2, push was for Task 6). Effect: Task 6's tag-push step becomes a no-op. Documented and accepted; no corrective delete on origin (would double the GitHub webhook events for no user-visible difference).
 - Sub-A's build-baseline hotfix (see "Fixed" above) modified `build.gradle`, `android/build.gradle`, `android/src/main/AndroidManifest.xml`, and `gradle.properties` — deviating from Sub-A's original "docs only, no gradle changes" scope. Deviation authorized by LO during execution under the `Task 5 unblock` (pin gdx-controllers) and `Android unblock` (enable multidex) decisions. Alternative was shipping Sub-A with an unbuildable baseline for Sub-B to inherit blindly. Total gradle+manifest diff: 9 lines across 4 files, all standard patterns from Android/libGDX best practice.
 
+### Polish
+
+- README ran through the humanizer skill to strip AI-writing tells: em-dashes across every section, promotional language ("wildly ambitious", "cult classic", "built with love"), the "Living design docs / Living roadmap / Living project" aphorism trio, the `**Bold header:** description` bullet pattern that dominated the vision sections, and the "Follow-along energy makes cult classics" closer. Structure preserved (badges, roadmap table, `<details>` sections, attribution chain, alpha-tester CTA); prose rewritten to sound like an indie dev with a real project. Zero em/en dashes remain per the humanizer's §14 hard constraint.
+
 ### Build verification (both green as of this commit)
 
 - `./gradlew android:assembleDebug` → `BUILD SUCCESSFUL in 38s` → `android/build/outputs/apk/debug/android-debug.apk` (22.8 MB)
