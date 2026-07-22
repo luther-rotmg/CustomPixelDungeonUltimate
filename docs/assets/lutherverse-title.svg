@@ -1,5 +1,8 @@
-<!-- Placeholder title card for Lutherverse.
-     Replace with real hero art when it's ready — keep the file path
+<!-- SPDX-License-Identifier: GPL-3.0-or-later
+     Copyright (c) 2026 luther-rotmg
+
+     Placeholder title card for Lutherverse.
+     Replace with real hero art when it's ready. Keep the file path
      (docs/assets/lutherverse-title.svg) so README doesn't need to change. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400" role="img" aria-label="Lutherverse — a roguelike descent">
   <defs>

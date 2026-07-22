@@ -91,7 +91,7 @@ Every substantive commit updates this section. It's the accurate current state, 
 | C | Broad modding-platform API | ⏳ next | Java-hook API on top of CPD's JSON-manifest framework: cutscenes, dialogue, dual-wield, story flags, biome swapping, NPC insertion. |
 | D | God Mode addon | ⏳ | Top-tier starter gear. Flagged as "cheat" in coop lobby. |
 | E | Hard Mode addon | ⏳ | Balance tuning. Coop-fair. |
-| F | Bonfire Mode addon | ⏳ | Souls-ish permadeath modifiers. Coop-fair. (Public name; internal working title: Dark Souls Mode.) |
+| F | Bonfire Mode addon | ⏳ | Permadeath modifiers plus rest-checkpoint economy. Coop-fair. |
 
 **Post-v0.1 waves.** These need their own brainstorm passes. The list below is a direction, not a commitment schedule.
 
@@ -124,7 +124,7 @@ Lutherverse is GPL-3.0. It carries the attribution chain forward:
 - Modding framework: *Custom Pixel Dungeon* by QuasiStellar. [QuasiStellar/custom-pixel-dungeon](https://github.com/QuasiStellar/custom-pixel-dungeon).
 - Predecessor: *Pixel Dungeon* by Watabou.
 
-See [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) for the full attribution chain and library notices (libGDX Apache 2.0, RoboVM/MobiVM GPLv2 with Classpath Exception, SPD-classes).
+See [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) for the GPL fork chain plus the currently-audited library notices (libGDX, RoboVM/MobiVM, SPD-classes). The remaining Apache/BSD/MIT dependency notices (FreeType, LWJGL, Kotlin, Ktor, SLF4J, org.json, gdx-controllers, androidx.multidex) get added before the first alpha binary ships; Sub-B tracks that.
 
 Not affiliated with, endorsed by, or connected to any of the games or franchises Lutherverse takes creative inspiration from. Character cameos are non-commercial fan-project references.
 
@@ -144,7 +144,7 @@ If you use or modify this code, your derivative work has to also be GPL-3.0. Tho
 |---|---|
 | **Android** | Supported. See build instructions below. |
 | **Desktop** (Windows / macOS / Linux) | Supported. See build instructions below. |
-| **iOS** | Unmaintained. The `:ios` Gradle module stays in `settings.gradle` in case a future contributor picks it back up, but nothing on this fork builds or tests it. |
+| **iOS** | Not supported. QSR removed the `ios/` directory from CPD in May 2023, so there is no iOS code in this repo. The `:ios` entry in `settings.gradle` is a leftover pointing at nothing. Sub-B or a follow-up either deletes the entry or resurrects iOS from SPD upstream if it becomes a goal. |
 
 ---
 
@@ -175,7 +175,7 @@ The runnable JAR lands in `desktop/build/libs/`.
 
 ## Modding
 
-The modding framework is whatever Custom Pixel Dungeon ships right now: JSON manifest per mod, resource overrides, hero JSON merge semantics. Refer to CPD's mod documentation until Sub-C adds the broader Java-hook API. Once it does, its reference docs will live at [`docs/modding-api-v1.md`](docs/modding-api-v1.md).
+The modding framework is whatever Custom Pixel Dungeon ships right now: JSON manifest per mod, resource overrides, hero JSON merge semantics. Refer to CPD's mod documentation until Sub-C adds the broader Java-hook API. Once it does, its reference docs will live at `docs/modding-api-v1.md` (nothing there yet).
 
 ---
 

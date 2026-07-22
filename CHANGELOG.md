@@ -57,6 +57,31 @@ Sub-A Task 5 (`./gradlew android:assembleDebug && ./gradlew desktop:release` mus
 
 - README ran through the humanizer skill to strip AI-writing tells: em-dashes across every section, promotional language ("wildly ambitious", "cult classic", "built with love"), the "Living design docs / Living roadmap / Living project" aphorism trio, the `**Bold header:** description` bullet pattern that dominated the vision sections, and the "Follow-along energy makes cult classics" closer. Structure preserved (badges, roadmap table, `<details>` sections, attribution chain, alpha-tester CTA); prose rewritten to sound like an indie dev with a real project. Zero em/en dashes remain per the humanizer's §14 hard constraint.
 
+### Fixed — post-review cleanup
+
+Final whole-branch review workflow (63 agents, 5 lenses, 3 adversarial verifiers per finding, 2.6M subagent tokens) returned a `block-until-fixed` verdict with one HIGH blocker + 4 MEDIUM doc-hygiene findings. This commit resolves the blocker plus the mediums plus a handful of low/nit polish items in a single pass.
+
+Blocker:
+- `README.md` roadmap table row F leaked `(Public name; internal working title: Dark Souls Mode.)` into the public shipping surface, defeating the exact trademark-safety split spec risk R4 was designed to prevent. Stripped the parenthetical; the row now reads with only the public "Bonfire Mode" name. Internal "Dark Souls Mode" reference retained in the design spec at `docs/superpowers/specs/…-design.md` per that spec's own line-303 policy ("used throughout this spec for clarity").
+
+Mediums:
+- `PROJECT-STATUS.md` had a stale `Current tip: main @ 6041725c8` (four commits behind), a broken alpha-tester anchor (`#alpha-testers-watchers-star-clickers--welcome` from before the humanizer rename), a dead scratchpad link at `AppData/Local/Temp/...` for the Sub-B research summary (unreachable on GitHub), a tense mismatch on build verification (line 12 said "in progress" while line 22 said "verified"), and a "this commit" self-reference in the recent-activity list that was stale by two commits. Rewrote all of them; the roadmap row for Sub-A now reads `✅ shipped`.
+- `README.md` attribution paragraph promised "the full attribution chain and library notices" but the notices file only covered the GPL fork chain plus three libraries. Reworded to "the GPL fork chain plus the currently-audited library notices"; expanded the Apache/BSD/MIT dep audit (FreeType, LWJGL, Kotlin, Ktor, SLF4J, org.json, gdx-controllers, androidx.multidex) is scheduled for Sub-B before the first alpha binary ships.
+
+Lows and nits bundled in:
+- `README.md` iOS row said `The :ios Gradle module is retained in settings.gradle for future reactivation` which implied dormant iOS code exists. Verified: QSR deleted the `ios/` directory from CPD in May 2023. The `:ios` entry in `settings.gradle` is a leftover pointing at nothing. Reworded to match reality.
+- `README.md` modding section rendered `docs/modding-api-v1.md` as a live link but the file does not exist yet. Changed to unlinked path with an explicit "nothing there yet" note.
+- `THIRD_PARTY_NOTICES.md` RoboVM copyright line attributed `2013-2026 RoboVM AB` but RoboVM AB dissolved after Xamarin's 2015 acquisition; the 2016+ work is the MobiVM community fork. Split the attribution.
+- `docs/assets/lutherverse-title.svg` lacked an SPDX-License-Identifier header. Added `GPL-3.0-or-later` + copyright.
+- Sub-B preliminary research imported into `docs/superpowers/research/sub-b-preliminary-research.md` (was previously only in transient scratchpad and linked from PROJECT-STATUS via a dead `AppData/Temp/` path).
+
+Backlog items (real but sub-alpha-triggered, Sub-A ships without them):
+- Full library-notice expansion in `THIRD_PARTY_NOTICES.md` (see mediums above; scheduled for Sub-B pre-alpha).
+- Cameo IP disclaimer expansion to explicitly reserve trademarks to their owners.
+- Vision-section prose reads present-indicative for aspirational features; sub-alpha risk of a reader mistaking aspiration for shipped state. Defer to Sub-C polish pass.
+- "Lutherverse" brand-collision check (USPTO / domain / handle) not run.
+- Keyblade / Aeons FFX-terminology rename-vs-keep decision when those become in-game nouns.
+
 ### Build verification (both green as of this commit)
 
 - `./gradlew android:assembleDebug` → `BUILD SUCCESSFUL in 38s` → `android/build/outputs/apk/debug/android-debug.apk` (22.8 MB)

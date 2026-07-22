@@ -52,9 +52,9 @@ libGDX provides the cross-platform game framework (rendering, input, audio, asse
 
 ---
 
-## RoboVM
+## RoboVM / MobiVM
 
-Copyright © 2013-2026 RoboVM AB (via the community-maintained MobiVM fork)
+Copyright © 2013-2015 RoboVM AB. Copyright © 2016-2026 MobiVM contributors.
 
 Licensed under the GNU General Public License, version 2 with the Classpath Exception.
 

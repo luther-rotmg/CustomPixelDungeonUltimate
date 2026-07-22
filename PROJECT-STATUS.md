@@ -3,15 +3,15 @@
 *Snapshot of where Lutherverse (repo: `CustomPixelDungeonUltimate`) is right now. Updated in the same commit as any substantive work — treat as ground truth for near-term state.*
 
 **Last update:** 2026-07-21
-**Current tip:** `main` @ `6041725c8` (or later if this file was updated in a subsequent commit — check `git log -1 main`)
+**Current tip:** `main` at the tip of this commit (run `git log -1 main` for the exact SHA; this file is updated in every substantive commit).
 
 ---
 
 ## Where we are
 
-**Sub-A (Fork infrastructure)** is essentially complete. All doc content shipped in three commits (`ad6be78d4`, `6e5d6447b`, `6041725c8`). Environment prereqs (JDK 17, Android SDK 33, build-tools 33.0.2, platform-tools) installed. Gradle Android + Desktop build verification is in progress in a background subagent; once green, the branch pushes to origin and a final whole-branch review closes Sub-A.
+**Sub-A (Fork infrastructure)** is shipped. Seven commits landed on `main` and pushed to origin. Both build paths verified green (Android APK 22.8 MB, Desktop JAR 45.9 MB). Final whole-branch review completed with one blocker (a "Dark Souls Mode" leak in the public roadmap table) plus four documentation mediums plus a small tail of nits; all fixed in the same commit that added this line.
 
-**Sub-B (Upstream sync to SPD v3.3.8)** is in the planning stage. Pre-brainstorm research is complete — see [Sub-B research summary](../../../AppData/Local/Temp/claude/c--Users-minec-Documents-Projects-VSCode/be0d765b-b8c0-43a5-b81e-d3c5a546d773/scratchpad/sub-b-research/SUMMARY.md) if you have local access, or ask the frontier to load it from memory. Headline: CPD is on SPD v2.1.0 (frozen since late 2023), so Sub-B absorbs ~1,417 upstream commits across five SPD minor versions. Adversarial verify revised the task estimate from 148 to **220-290**. 8 architectural brainstorm questions await LO answers before Sub-B implementation begins.
+**Sub-B (Upstream sync to SPD v3.3.8)** is in the planning stage. Pre-brainstorm research is complete: see [Sub-B preliminary research](docs/superpowers/research/sub-b-preliminary-research.md) for the full picture. Headline: CPD is on SPD v2.1.0 (frozen since May 2023), so Sub-B absorbs roughly 1,417 upstream commits across five SPD minor versions. Adversarial verify revised the task estimate from 148 to **220-290**. Eight architectural brainstorm questions await LO answers before Sub-B implementation begins.
 
 ---
 
@@ -19,7 +19,7 @@
 
 | Sub | Name | Status | Blockers / Notes |
 |---|---|---|---|
-| A | Fork infrastructure | 🟢 both builds verified | Task 6 push pending final review |
+| A | Fork infrastructure | ✅ shipped | Seven commits on origin, both builds verified, final review clean after one fix commit. |
 | B | Upstream sync (CPD → SPD v3.3.8) | 🟡 research done, brainstorm pending | 8 LO decisions needed; revised task estimate 220-290 across 8 slices |
 | C | Broad modding-platform API | ⚪ not started | Blocked on Sub-B ship |
 | D | God Mode addon | ⚪ | Blocked on Sub-C |
@@ -59,7 +59,9 @@
 - Ad-hoc rebrand commit (Lutherverse README + placeholder title card SVG) — `6041725c8`
 - CHANGELOG.md + PROJECT-STATUS.md added per changelog-cadence rule — `f37dfb1b2`
 - CONTRIBUTING.md + `.github/ISSUE_TEMPLATE/` (bug / feature / cameo templates + config) — `75f58ce99`
-- Sub-A build-baseline hotfix (gdx-controllers pin + multidex + useAndroidX + desktop:dist→release doc rename) — this commit
+- Sub-A build-baseline hotfix (gdx-controllers pin + multidex + useAndroidX + desktop:dist→release doc rename): `fa5a31750`
+- README humanization pass (stripped AI-writing tells): `3eff58a15`
+- Final whole-branch review fix commit (Dark Souls Mode leak, PROJECT-STATUS staleness, RoboVM copyright, SVG SPDX header, iOS README framing, notices-scope wording, Sub-B research imported into repo): this commit
 
 ---
 
@@ -72,6 +74,6 @@
 
 ## Contribution status
 
-- ★ Star / 👁 Watch → Releases welcome — see [README's alpha-tester section](README.md#alpha-testers-watchers-star-clickers--welcome)
+- ★ Star and 👁 Watch → Releases are welcome. See [README's alpha-tester section](README.md#alpha-testers-and-watchers).
 - Issues welcome (bugs, feature ideas, cameo requests)
 - **PRs currently not accepted** — modding API is not stable, every hook is subject to change; this loosens up when Sub-C ships
