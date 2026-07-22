@@ -177,6 +177,8 @@ The modding framework is currently the one Custom Pixel Dungeon ships — JSON m
 
 ## Development docs
 
+- **Changelog:** [`CHANGELOG.md`](CHANGELOG.md) — every substantive commit
+- **Project status:** [`PROJECT-STATUS.md`](PROJECT-STATUS.md) — near-term state, blockers, roadmap
 - Design specs: [`docs/superpowers/specs/`](docs/superpowers/specs/)
 - Implementation plans: [`docs/superpowers/plans/`](docs/superpowers/plans/)
 - Assets: [`docs/assets/`](docs/assets/)
