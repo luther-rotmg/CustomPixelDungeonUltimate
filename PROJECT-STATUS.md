@@ -46,9 +46,12 @@
 - Sub-B pre-brainstorm research workflow: 7 agents, 3 phases, adversarial verify caught 50% task-estimate under
 - CHANGELOG.md + PROJECT-STATUS.md (this file) added for LO's changelog-cadence discipline
 
-**Still in flight (background):**
-- Sub-A Task 5: gradle android:assembleDebug + gradle desktop:dist verification
-- (When Task 5 completes) → Sub-A Task 6: push commits + tag to origin → final whole-branch review workflow
+**Sub-A Task 5 (build verification) status:** blocked on pre-existing upstream dependency rot. Both Android (`./gradlew android:assembleDebug`) and Desktop (`./gradlew desktop:dist`) fail at fork-base commit `c97fb83` because CPD's `build.gradle` references `gdxControllersVersion = '2.2.4-SNAPSHOT'` which no longer resolves from any Maven repository (SNAPSHOT deps expire). Since Sub-A never touched any gradle file, this failure is inherited from upstream, not caused by us. Awaiting LO decision on: (a) pin to a real release version inline (~1-line build.gradle patch, deviates from Sub-A "no gradle changes" scope), (b) accept partial Sub-A + defer full build verification to Sub-B where SPD engine bumps will naturally resolve it, or (c) vendor a local jar. See [CHANGELOG](CHANGELOG.md#deferred-verifications-task-5-partially-blocked).
+
+**Ad-hoc additions this session:**
+- Ad-hoc rebrand commit (Lutherverse README + placeholder title card SVG) — `6041725c8`
+- CHANGELOG.md + PROJECT-STATUS.md added per changelog-cadence rule — `f37dfb1b2`
+- CONTRIBUTING.md + `.github/ISSUE_TEMPLATE/` (bug / feature / cameo templates + config) — this commit
 
 ---
 

@@ -23,6 +23,8 @@ Work-in-progress on `main` since the fork base (`cpd-sync-base-2025-08-15`, CPD 
 - `docs/superpowers/plans/2026-07-21-cpdu-sub-a-fork-infrastructure.md` — Sub-A implementation plan (6 tasks)
 - `docs/assets/lutherverse-title.svg` — placeholder title card (cosmic-horror-adjacent purple/gold, uzumaki spirals — replaceable with real hero art)
 - This `CHANGELOG.md` and [`PROJECT-STATUS.md`](PROJECT-STATUS.md) as living project-state documents
+- `CONTRIBUTING.md` — how issues/stars/watches are welcomed; PR gate explanation; per-issue-type expectations
+- `.github/ISSUE_TEMPLATE/` — three templates (🐛 bug report, 💡 feature request, 🎭 cameo suggestion) + `config.yml` disabling blank issues and providing quick links to PROJECT-STATUS / CHANGELOG / design specs
 
 ### Changed
 
@@ -37,6 +39,12 @@ Work-in-progress on `main` since the fork base (`cpd-sync-base-2025-08-15`, CPD 
 ### Known caveats
 
 - The annotated tag `cpd-sync-base-2025-08-15` was pushed to origin during Sub-A Task 2 (implementer overreach — the plan brief said "no push" at Task 2, push was for Task 6). Effect: Task 6's tag-push step becomes a no-op. Documented and accepted; no corrective delete on origin (would double the GitHub webhook events for no user-visible difference).
+- **Upstream build broken at fork base**: Sub-A's Task 5 (gradle Android + Desktop verification) discovered that CPD's `build.gradle` at commit c97fb83 references `gdxControllersVersion = '2.2.4-SNAPSHOT'` (Maven SNAPSHOT dependency on `com.badlogicgames.gdx-controllers`). SNAPSHOT deps expire; this one no longer resolves from Google Maven, Maven Central, or Sonatype OSS Snapshots. Both `./gradlew android:assembleDebug` (fails in ~1m) and `./gradlew desktop:dist` (fails in ~11s) fail with `Could not find com.badlogicgames.gdx-controllers:gdx-controllers-<module>:2.2.4-SNAPSHOT`. **Sub-A did not touch any gradle file** — this is pre-existing upstream rot. Options for resolution await LO decision; Sub-B's absorption of SPD v3.2 (libGDX 1.13.6) or v3.3 (libGDX 1.14) will naturally update gdx-controllers to a resolvable release version, so the "true fix" is to defer to Sub-B. Interim options: pin `gdxControllersVersion` to a real release (`2.2.4` without the `-SNAPSHOT`, or `2.2.3`), or vendor a local jar. See Sub-A execution log for full trace.
+
+### Deferred verifications (Task 5 partially blocked)
+
+- `./gradlew android:assembleDebug` — cannot verify build baseline until `gdx-controllers` SNAPSHOT is resolved (Sub-B or a targeted build.gradle patch)
+- `./gradlew desktop:dist` — same blocker (SPD-classes also depends on gdx-controllers-core)
 
 ---
 
